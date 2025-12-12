@@ -29,8 +29,9 @@ public class LinkyList <T>
     }
 
     /**
+     * True if the LinkyList is empty, false otherwise
      * 
-     * @return
+     * @return if the LinkyList is empty, false otherwise
      */
     public boolean isEmpty()
     {
@@ -46,8 +47,9 @@ public class LinkyList <T>
     }
 
     /**
+     * Returns the number of elements in this list
      * 
-     * @return
+     * @return the number of elements in this list
      */
     public int size()
     {
@@ -69,7 +71,7 @@ public class LinkyList <T>
      */
     public boolean contains( Object obj )
     {
-        return indexOf(obj) != -1;
+        return indexOf(obj) != -1; //TODO: Change later
     }
 
     /**
@@ -116,9 +118,9 @@ public class LinkyList <T>
     }
 
     /**
-     * Appends a Node at the end of the LinkyList with the given data
+     * Appends the specified element to the end of this list.
      * 
-     * @param data the data of the new Node
+     * @param element the element to be appended
      * @return true if the addition was successful, false otherwise
      */
     public boolean add( T element )
@@ -217,7 +219,6 @@ public class LinkyList <T>
             return true;
         }
         
-        // Search for the object in the rest of the list
         Node current = head;
         while( current.next != null )
         {
@@ -267,7 +268,6 @@ public class LinkyList <T>
         }
         return lastFound;
     }
-    //***********METHODS OVERWRITTEN************
     
     /**
      * Compares the specified object with this list for equality
