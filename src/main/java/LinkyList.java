@@ -39,7 +39,7 @@ public class LinkyList <T>
     }
 
     /**
-     * Clears the LinkyList
+     * Removes all of the elements from this list. The list will be empty after this call returns.
      */
     public void clear()
     {
@@ -64,7 +64,7 @@ public class LinkyList <T>
     }
 
     /**
-     * Returns true if this list contains the specified element
+     * Returns true if this list contains the specified element. More formally, returns true if and only if this list contains at least one element e such that Objects.equals(obj, e).
      * 
      * @param obj element whose presence in this list is to be tested
      * @return true if this list contains the specified element
@@ -98,11 +98,11 @@ public class LinkyList <T>
      * Replaces the element at the specified position in this list with the specified element
      * 
      * @param index index of the element to replace
-     * @param data element to be stored at the specified position
+     * @param element element to be stored at the specified position
      * @return the element previously at the specified position
      * @throws IndexOutOfBoundsException if the index is out of range
      */
-    public T set( int index, T data )
+    public T set( int index, T element )
     {
         if( index < 0 || index >= size() )
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size());
@@ -113,7 +113,7 @@ public class LinkyList <T>
             current = current.next;
         }
         T oldData = current.data;
-        current.data = data;
+        current.data = element;
         return oldData;
     }
 
@@ -140,7 +140,7 @@ public class LinkyList <T>
     }
 
     /**
-     * Inserts the specified element at the specified position in this list
+     * Inserts the specified element at the specified position in this list. Shifts the element currently at that position (if any) and any subsequent elements to the right (adds one to their indices).
      * 
      * @param index index at which the specified element is to be inserted
      * @param element element to be inserted
@@ -202,7 +202,7 @@ public class LinkyList <T>
     }
 
     /**
-     * Removes the first occurrence of the specified element from this list
+     * Removes the first occurrence of the specified element from this list, if it is present.
      * 
      * @param obj element to be removed from this list, if present
      * @return true if this list contained the specified element
@@ -212,7 +212,6 @@ public class LinkyList <T>
         if( head == null )
             return false;
         
-        // Check if head contains the object
         if( (obj == null && head.data == null) || (obj != null && obj.equals(head.data)) )
         {
             head = head.next;
@@ -233,10 +232,10 @@ public class LinkyList <T>
     }
 
     /**
-     * Returns the index of the first occurrence of the specified element
+     * Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element. More formally, returns the lowest index i such that Objects.equals(o, get(i)), or -1 if there is no such index.
      * 
      * @param obj element to search for
-     * @return the index of the first occurrence, or -1 if not found
+     * @return the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element
      */
     public int indexOf( Object obj )
     {
@@ -251,10 +250,10 @@ public class LinkyList <T>
     }
 
     /**
-     * Returns the index of the last occurrence of the specified element
+     * Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the element. More formally, returns the highest index i such that Objects.equals(o, get(i)), or -1 if there is no such index.
      * 
      * @param obj element to search for
-     * @return the index of the last occurrence, or -1 if not found
+     * @return the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the element
      */
     public int lastIndexOf( Object obj )
     {
@@ -279,29 +278,27 @@ public class LinkyList <T>
     {
         if( obj == this )
             return true;
-        if( !(obj instanceof LinkyList) )
+        
+        if( obj == null || !(obj instanceof LinkyList) )
             return false;
         
-        @SuppressWarnings("unchecked")
-        LinkyList<T> other = (LinkyList<T>) obj;
-        
-        if( this.size() != other.size() )
-            return false;
+        LinkyList list = (LinkyList) obj;
         
         Node thisCurrent = this.head;
-        Node otherCurrent = other.head;
+        Node otherCurrent = list.head;
         
-        while( thisCurrent != null )
+        while( thisCurrent != null && otherCurrent != null )
         {
             if( thisCurrent.data == null && otherCurrent.data != null )
                 return false;
             if( thisCurrent.data != null && !thisCurrent.data.equals(otherCurrent.data) )
                 return false;
+            
             thisCurrent = thisCurrent.next;
             otherCurrent = otherCurrent.next;
         }
         
-        return true;
+        return thisCurrent == null && otherCurrent == null;
     }
     
     /**
