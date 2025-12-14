@@ -71,7 +71,16 @@ public class LinkyList <T>
      */
     public boolean contains( Object obj )
     {
-        return indexOf(obj) != -1; //TODO: Change later
+        Node current = head;
+        
+        while( current != null )
+        {
+            if( (obj == null && current.data == null) || (obj != null && obj.equals(current.data)) )
+                return true;
+            current = current.next;
+        }
+        
+        return false;
     }
 
     /**
