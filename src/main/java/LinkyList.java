@@ -2,7 +2,7 @@
  * Our version of a linked-list
  *
  * @author Austin Benedicto
- * @version 12/10/2025
+ * @version 12/14/2025
  */
 public class LinkyList <T>
 {
